@@ -13,6 +13,7 @@ node{
    sh 'docker build -t kammana/myweb:0.0.1 .'
  }
  
+ 
  stage('Push to Docker Hub'){
  
 	 withCredentials([string(credentialsId: 'github-pwd', variable: 'dockerHubPwd')]) {
