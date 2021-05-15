@@ -1,3 +1,4 @@
+@Library('myweb-libs')_
 pipeline{
     agent any
     tools{
@@ -16,11 +17,8 @@ pipeline{
         }
         stage("Deploy to Tomcat"){
             steps{
-                sshagent(['tomcat']) {
-                sh "mv target/*war target/myweb.war"
-                sh "scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@172.31.9.194:/opt/tomcat8/webapps"
-                sh "ssh ec2-user@172.31.9.194 /opt/tomcat8/bin/shutdown.sh"
-                sh "ssh ec2-user@172.31.9.194 /opt/tomcat8/bin/startup.sh"
+                TomcatDeploy('tomcat','ec2-user','172.31.9.194')
+              
 
                 
         }
